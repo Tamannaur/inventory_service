@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - include:
+      file: 001-create-inventory-table.xml
+      relativeToChangelogFile: true
+  - include:
+      file: 002-load-inventory-data.xml
+      relativeToChangelogFile: true
