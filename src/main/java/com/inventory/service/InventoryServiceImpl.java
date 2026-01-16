@@ -48,7 +48,7 @@ public class InventoryServiceImpl implements InventoryService {
 
 
     @Override
-    public InventoryResponse updateInventory(Long productId, int quantity) {
+    public InventoryResponse updateInventory(Long productId, int quantity, boolean fromOutSide) {
         List<Inventory> batches = repository.findByProductIdOrderByExpiryDateAsc(productId);
 
         if (batches.isEmpty()) {
@@ -56,10 +56,19 @@ public class InventoryServiceImpl implements InventoryService {
         }
 
         int remaining = quantity;
-        for (Inventory batch : batches) {
-            if (remaining <= 0) break;
-            batch.setQuantity(quantity);
-            repository.save(batch);
+        if (fromOutSide){
+            for (Inventory batch : batches) {
+                if (remaining <= 0) break;
+                remaining = batch.getQuantity()-Math.min(quantity,batch.getQuantity());
+                batch.setQuantity(remaining);
+                repository.save(batch);
+            }
+        }else {
+            for (Inventory batch : batches) {
+                if (remaining <= 0) break;
+                batch.setQuantity(quantity);
+                repository.save(batch);
+            }
         }
 
         InventoryResponse response = new InventoryResponse();

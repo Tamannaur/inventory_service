@@ -29,8 +29,8 @@ public class InventoryController {
     }
 
     @PostMapping("/update")
-    public ResponseEntity<InventoryResponse> updateInventory(@RequestBody InventoryUpdateReq inventoryUpdateReq) {
-        InventoryResponse response = service.updateInventory(inventoryUpdateReq.getProductId(), inventoryUpdateReq.getQuantity());
+    public ResponseEntity<InventoryResponse> updateInventory(@RequestBody InventoryUpdateReq inventoryUpdateReq,@RequestHeader boolean fromOutSide) {
+        InventoryResponse response = service.updateInventory(inventoryUpdateReq.getProductId(), inventoryUpdateReq.getQuantity(), fromOutSide);
         if (null == response){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }

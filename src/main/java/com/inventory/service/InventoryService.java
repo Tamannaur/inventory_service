@@ -5,6 +5,6 @@ import java.util.List;
 
 public interface InventoryService {
     InventoryResponse getInventoryByProduct(Long productId);
-    InventoryResponse updateInventory(Long productId, int quantity);
+    InventoryResponse updateInventory(Long productId, int quantity, boolean fromOutSide);
 }
 
