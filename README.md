@@ -62,6 +62,7 @@ This project is a Spring Boot-based inventory management service designed to han
 fromOutSide : false
 
 **Response Body**:
+```json
 {
     "productId": 1003,
     "productName": "Tablet",
@@ -78,6 +79,7 @@ fromOutSide : false
         }
     ]
 }
+```
 
 **Description**:
 - If `fromOutside=true`: Reduces 31 units from the earliest expiring batches.
